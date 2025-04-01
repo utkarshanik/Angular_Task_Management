@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,20 @@ export class LoginComponent {
   username:string="";
   password:string=""
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private toastr: ToastrService) {}
   onSubmit() {
-    if(this.username==="utkarsha" && this.password==="12345")
+    if(this.username==="Utkarsha" && this.password==="12345")
     {
+      this.toastr.success(`Login successful ${this.username} !`, 'Success');
       this.router.navigate(['/home']);
     }
     else
     {
-      alert('Invalid credentials');
+      this.toastr.error('Invalid credentials', 'Error');
+      this.username=''
+      this.password=''
     }
   }
 
 }
+  
