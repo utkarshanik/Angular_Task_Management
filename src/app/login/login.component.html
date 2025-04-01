@@ -1,0 +1,29 @@
+
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="container bg-info p-4 rounded shadow" style="max-width: 400px; ">
+    <h2 class="text-center m-3">Login</h2>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="needs-validation mt-4" novalidate>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" required>
+        <span *ngif="" ></span>
+        <label for="floatingInput">Username</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required [(ngModel)]="password" name="password" required #passwordInput="ngModel">
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <div class="col-12 text-center mt-4">
+        <!-- Submit Button -->
+        <!-- <button type="submit" class="btn btn-dark"> <a [routerLink]="['/home']" routerLinkActive="router-link-active">Submit</a></button> -->
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-dark">Submit</button>
+      </div>
+      
+    </form>
+  </div>
+</div>
+
