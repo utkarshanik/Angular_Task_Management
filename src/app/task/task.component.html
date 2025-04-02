@@ -16,6 +16,8 @@
               <th scope="col">Status</th>
               <th scope="col">Estimate</th>
               <th scope="col">Time Spent</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +28,11 @@
               <td>{{ task.created }}</td>
               <td>{{ task.manager }}</td>
               <td>{{ task.time }}</td>
+
+              <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button></td>
+              <td> <button class="btn btn-danger btn-delete  " type="button">Delete</button></td>
+              
+
             </tr>
           </tbody>
         </table>

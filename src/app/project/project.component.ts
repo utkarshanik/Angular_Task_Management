@@ -80,6 +80,69 @@ export class ProjectComponent {
   //SHOwing the data from LocalStorage....
   taskdata: any[] = JSON.parse(localStorage.getItem('tasks') || '[]'); 
 
+  selectedTaskID: number | null = null;
+  //Updating the task
+  fillUpdateForm(taskID: number) {
+    this.selectedTaskID = taskID;  
+    let task = this.taskdata.find(t => t.id === taskID);
+  
+    if (!task) {
+      console.error("Task not found!");
+      return;
+    }
+  
+    // Set form fields
+    this.title = task.title || '';
+    this.desc = task.desc || '';
+    this.created = task.created || '';
+    this.manager = task.manager || '';
+    this.startdate = task.startdate || '';
+    this.enddate = task.enddate || '';
+    this.team = task.team || '';
+    this.duedate = task.duedate || '';
+  }
+
+  AddUpdate()
+  {
+    
+      // Prevent default form submission behavior
+    
+      if (this.selectedTaskID === null) {
+        console.error("No task selected for update!");
+        return;
+      }
+    
+      // Find the index of the task to be updated
+      let taskIndex = this.taskdata.findIndex(t => t.id === this.selectedTaskID);
+    
+      if (taskIndex === -1) {
+        console.error("Task not found in localStorage!");
+        return;
+      }
+    
+      // Update the task data
+      this.taskdata[taskIndex] = {
+        id: this.selectedTaskID,
+        title: this.title,
+        desc: this.desc,
+        created: this.created,
+        manager: this.manager,
+        startdate: this.startdate,
+        enddate: this.enddate,
+        team: this.team,
+        duedate: this.duedate
+      };
+    
+      // Save updated data back to localStorage
+      localStorage.setItem('tasks', JSON.stringify(this.taskdata));
+    
+      // Reset the selected task ID
+      this.selectedTaskID = null;
+
+      console.log("Task updated successfully!");
+    
+  }
+
 //Deleting the data...
 deleteTask(taskId: number): void {
   // Retrieve tasks from localStorage
