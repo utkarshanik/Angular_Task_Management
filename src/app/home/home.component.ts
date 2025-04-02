@@ -34,6 +34,7 @@ export class HomeComponent {
       alert('Please fill in all fields');
       return;
     }
+    
     // Get existing tasks from localStorage or initialize an empty array
     const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     let newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;

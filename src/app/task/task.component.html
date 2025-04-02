@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-5">
+  <h3 class="data-item" >All Tasks</h3>
+
+   <div class="table-responsive "> 
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Asssigned To</th>
+            <th scope="col">Status</th>
+            <th scope="col">Estimate</th>
+            <th scope="col">Time spend</th>
+          </tr>
+        </thead>
+
+        <tbody class="showdata ">
+          <tr *ngFor="let task of tasks">
+            <th scope="row" class="data-item">{{task.taskid}}</th> 
+            <td class="data-item">{{task.title}}</td>
+            <td class="data-item">{{task.desc}}</td>
+            <td class="data-item">{{task.created}}</td>
+            <td class="data-item">{{task.manager}}</td>
+            <td class="data-item">{{task.time}}</td>
+          
+<!--             
+            <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#exampleModal">Update</button></td>
+
+            <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#taskModal" (click)="addtask(task.id)">Add Task</button></td>
+
+            <td> <button class="btn btn-danger btn-delete  " data-deleteid=${task.task_id} (click)="deleteTask(task.id)" type="button">Delete</button></td>
+            </tr>  -->
+      </table>
+  </div> 
+</div>
