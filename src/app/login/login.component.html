@@ -8,9 +8,7 @@
 
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" ngModel required>
-
         <span class="text-danger" *ngIf="usernameInput.invalid && usernameInput.touched">*Provide Valid Name</span>
-        
         <label for="floatingInput">Username</label>
       </div>
       

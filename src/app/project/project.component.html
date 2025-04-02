@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-4">
+
+</div>
+
+<div class="container-fluid mt-3">
+  <h3 class="data-item" >All Project</h3>
+
+  <div class="p-2" id="liveAlertPlaceholderr"> </div>
+
+  <div class="table-responsive ">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">createdBy</th>
+            <th scope="col">Project Manager</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Team Members</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Add Task</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="showdata ">
+          <tr *ngFor="let task of taskdata">
+            <th scope="row" class="data-item">{{task.id}}</th> 
+            <td class="data-item">{{task.title}}</td>
+            <td class="data-item">{{task.desc}}</td>
+            <td class="data-item">{{task.created}}</td>
+            <td class="data-item">{{task.manager}}</td>
+            <td class="data-item">{{task.startdate}}</td>
+            <td class="data-item">{{task.enddate}}</td>
+            <td class="data-item">{{task.team}}</td>
+            <td class="data-item">{{task.duedate}}</td>
+            
+            <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#staticBackdrop">Update</button></td>
+            <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#staticBackdrop">Add task</button></td>
+
+            <td> <button class="btn btn-danger btn-delete  " data-deleteid=${task.task_id} type="button">Delete</button></td>
+            </tr> 
+      </table>
+  </div>
+</div>
