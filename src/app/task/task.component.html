@@ -3,7 +3,7 @@
   <h3 class="text-center mb-4">All Projects & Tasks</h3>
 
   <div *ngFor="let project of projects" class="mb-4">
-    <h4 class="fw-bold">{{ project.title }}</h4> <!-- Display Project Title -->
+    <h4 class="fw-bold text-secondary"><span class="text-dark">Project Name :-</span> {{ project.title }}</h4> <!-- Display Project Title -->
 
     <div *ngIf="getTasksForProject(project.id).length > 0; else noTask">
       <div class="table-responsive">
@@ -23,8 +23,8 @@
           <tbody>
             <tr *ngFor="let task of getTasksForProject(project.id)">
               <th scope="row">{{ task.taskid }}</th>
-              <td class="text-truncate" style="max-width: 200px;">{{ task.title }}</td>
-              <td class="text-truncate" style="max-width: 150px;">{{ task.desc }}</td>
+              <td class="col-3">{{ task.title }}</td>
+              <td class="col-2">{{ task.desc }}</td>
               <td [ngClass]="colorchange(task.created)">{{ task.created }}</td> 
               <td>{{ task.manager }}</td>
               <td>{{ task.time }}</td>
@@ -108,7 +108,7 @@
 
         <div class="modal-footer mt-3">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary " (click)="updateSubmit()" [disabled]=taskForm.invalid >Submit</button>
+          <button type="submit" class="btn btn-primary " (click)="updateSubmit()" [disabled]=taskForm.invalid data-bs-dismiss="modal">Submit</button>
         </div>
         </form>
       </div>

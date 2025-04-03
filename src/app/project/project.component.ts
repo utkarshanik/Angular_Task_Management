@@ -75,9 +75,7 @@ export class ProjectComponent {
 
     form.reset();
     this.toast.success("Task Added Successfully !!!")
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+
   }
   //SHOwing the data from LocalStorage....
   taskdata: any[] = JSON.parse(localStorage.getItem('tasks') || '[]');
@@ -145,10 +143,6 @@ export class ProjectComponent {
     this.selectedTaskID = null;
 
     this.toast.success("Task Updated Successfully !!!")
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
-
 
   }
 

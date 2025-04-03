@@ -23,7 +23,7 @@ export class HomeComponent {
   team: string = '';
   duedate:string = '';
   
-
+  
   onSubmit(event: Event,projectForm:any) {
     event.preventDefault(); // Prevent default form submission behavior
     console.log('Title:', this.title);
@@ -41,7 +41,7 @@ export class HomeComponent {
     
     const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     let newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
-
+    
     const newTask = {
       id:newId, 
       title: this.title,
@@ -53,19 +53,18 @@ export class HomeComponent {
       team: this.team,
       duedate: this.duedate
     };
-
+    
     tasks.push(newTask);
-
+    
     localStorage.setItem('tasks', JSON.stringify(tasks));
     this.toast.success("Task Added Successfully !!!")
     
-    projectForm.reset();
+    
 
-    setTimeout(() => {
-      window.location.reload();
-      }, 3000);
+    projectForm.reset();
+  
     
   }
-
-
+  
+  
 }

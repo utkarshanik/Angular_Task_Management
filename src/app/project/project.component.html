@@ -132,7 +132,7 @@
   
           <div class="modal-footer mt-3">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary  sub " (click)="AddUpdate()" [disabled]=projectForm.invalid >Submit</button>
+            <button type="submit" class="btn btn-primary  sub " (click)="AddUpdate()" data-bs-dismiss="modal" [disabled]=projectForm.invalid >Submit</button>
           </div>
           </form>
         </div>
@@ -202,7 +202,7 @@
   
           <div class="modal-footer mt-3">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary  " [disabled]=taskForm.invalid >Submit</button>
+            <button type="submit" class="btn btn-primary  " [disabled]=taskForm.invalid data-bs-dismiss="modal" >Submit</button>
           </div>
           </form>
         </div>

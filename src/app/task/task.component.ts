@@ -73,9 +73,7 @@ export class TaskComponent {
           localStorage.setItem('tasksItem',JSON.stringify(deleteTask))
        
           this.toast.success('Project deleted successfully!', 'Success');
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
+     
         } else {
           this.toast.info('Deletion canceled.', 'Info');
         }
