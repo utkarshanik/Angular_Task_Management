@@ -1,32 +1,32 @@
 
 
 <div class="d-flex justify-content-center align-items-center vh-100">
-  <div class="container bg-secondary  p-4 rounded shadow" style="max-width: 400px; ">
-    <h2 class="text-center m-3  text-light">Login</h2>
+  <div class="container bg-secondary-subtle p-4 rounded shadow" style="max-width: 400px; ">
+    <h2 class="text-center m-3">Sign UP</h2>
 
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="needs-validation mt-4" novalidate>
+    <form (ngSubmit)="onSubmit()" #signinForm="ngForm" class="needs-validation mt-4" novalidate>
 
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" ngModel required>
-        <span class="text-warning" *ngIf="usernameInput.invalid && usernameInput.touched">*Provide Valid Name</span>
+        <span class="text-danger" *ngIf="usernameInput.invalid && usernameInput.touched">*Provide Valid Name</span>
         <label for="floatingInput">Username</label>
       </div>
       
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required [(ngModel)]="password" name="password" required #passwordInput="ngModel">
-        <span class="text-warning" *ngIf="passwordInput.invalid && passwordInput.touched">*Provide Valid Password</span>
+        <span class="text-danger" *ngIf="passwordInput.invalid && passwordInput.touched">*Provide Valid Password</span>
         <label for="floatingPassword">Password</label>
       </div>
 
       <div class="form-floating mt-3">
-        <a [routerLink]="['/sign'] " class=" text-light">Sign Up</a>
+        <a [routerLink]="['/login'] ">Login</a>
         <!-- <a [routerLink]="['/sign']" routerLinkActive="router-link-active" ]>Sign Up</a> -->
       </div>
 
       <div class="col-12 text-center mt-4">
         <!-- Submit Button -->
         <!-- <button type="submit" class="btn btn-dark"> <a [routerLink]="['/home']" routerLinkActive="router-link-active">Submit</a></button> -->
-        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-dark" >Submit</button>
+        <button type="submit" [disabled]="signinForm.invalid" class="btn btn-dark" >Submit</button>
       </div>
       
     </form>

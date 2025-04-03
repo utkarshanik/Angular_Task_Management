@@ -16,17 +16,22 @@ export class LoginComponent {
 
   constructor(private router: Router,private toastr: ToastrService) {}
   onSubmit() {
-    if(this.username==="Utkarsha" && this.password==="12345")
+
+    let userData= JSON.parse(localStorage.getItem('user') || '[]');
+    let match= userData.find((matchid:any)=> matchid.username=== this.username && matchid.password=== this.password)
+
+    if(match)
     {
       this.toastr.success(`Login successful ${this.username} !`, 'Success');
       this.router.navigate(['/home']);
     }
     else
     {
-      this.toastr.error('Invalid credentials', 'Error');
-      this.username=''
-      this.password=''
+       this.toastr.error('Invalid credentials', 'Error');
+        this.username=''
+        this.password=''
     }
+
   }
 
 }
