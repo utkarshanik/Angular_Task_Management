@@ -25,7 +25,7 @@
               <th scope="row">{{ task.taskid }}</th>
               <td class="text-truncate" style="max-width: 200px;">{{ task.title }}</td>
               <td class="text-truncate" style="max-width: 150px;">{{ task.desc }}</td>
-              <td>{{ task.created }}</td>
+              <td [ngClass]="colorchange(task.created)">{{ task.created }}</td> 
               <td>{{ task.manager }}</td>
               <td>{{ task.time }}</td>
 
@@ -57,6 +57,7 @@
             <label for="inputtitle" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
               <input  type="text" class="form-control" id="taskinputtitle" [(ngModel)]="tasktitle" name="tasktitle" #tasktitle1="ngModel" required placeholder="Title" >
+                <!-- <span class="text-danger mt-2" *ngIf="tasktitle1.touched || tasktitle1.invalid">*Provide valid data</span> -->
               
             </div>
           </div>
@@ -64,7 +65,10 @@
           <div class="row mb-3">
             <label for="desc" class="col-sm-2 col-form-label">Assigned to</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="taskdesc" rows="3" [(ngModel)]="taskdesc" name="taskdesc" #taskdesc1="ngModel" required  placeholder="Assigned to"></textarea>
+              <!-- <textarea class="form-control" id="taskdesc" rows="3" [(ngModel)]="taskdesc" name="taskdesc" #taskdesc1="ngModel" required  placeholder="Assigned to"></textarea> -->
+              <input  type="text" class="form-control" id="taskdesc" [(ngModel)]="taskdesc" name="taskdesc" #taskAssign="ngModel" required placeholder="Assigned To" >
+                <!-- <span class="text-danger mt-2" *ngIf="taskAssign.touched || taskAssign.invalid">*Provide valid data</span> -->
+
             </div>
           </div>
 
@@ -74,10 +78,12 @@
               <div class="col-sm-10">
                 <select class="form-select" id="taskinputpriority"  [(ngModel)]="taskcreated" name="taskcreated" #taskcreated1="ngModel" required aria-label="Default select example">
                   <option selected>Select option</option>
-                  <option value="High">High</option>
-                  <option value="Moderate">Moderate</option>
-                  <option value="Low">Low</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Pending">In Progress</option>
                 </select>
+                <!-- <span class="text-danger mt-2" *ngIf="taskcreated1.touched || taskcreated1.invalid">*Provide valid data</span> -->
+
               </div>
             </div>
             </div>
@@ -85,14 +91,18 @@
           <div class="row mb-3">
             <label for="inputmanager" class="col-sm-2 col-form-label required">Estimate</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="taskinputmanager" [(ngModel)]="taskmanager" name="taskmanager" #taskmanager1="ngModel" required placeholder="Estimate">
+              <input type="time" class="form-control" id="taskinputmanager" [(ngModel)]="taskmanager" name="taskmanager" #taskmanager1="ngModel" required placeholder="Estimate">
+                <!-- <span class="text-danger mt-2" *ngIf="taskmanager1.touched || taskmanager1.invalid">*Provide valid data</span> -->
+
             </div>
           </div>
 
           <div class="row mb-3">
             <label for="inputtime" class="col-sm-2 col-form-label required">Time Spent</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="taskinputtime" [(ngModel)]="tasktime" name="tasktime" #tasktime1="ngModel" required placeholder="Project Manager">
+              <input type="time" class="form-control" id="taskinputtime" [(ngModel)]="tasktime" name="tasktime" #tasktime1="ngModel" required placeholder="Project Manager">
+                <!-- <span class="text-danger mt-2" *ngIf="tasktime1.touched || tasktime1.invalid">*Provide valid data</span> -->
+
             </div>
           </div>
 

@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-task',
-  imports: [NavbarComponent,NgFor,NgIf,FormsModule],
+  imports: [NavbarComponent,NgFor,NgIf,FormsModule,NgClass],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
@@ -22,7 +25,7 @@ export class TaskComponent {
     projects:any=JSON.parse(localStorage.getItem('tasks') || '[]')
     tasks:any=JSON.parse(localStorage.getItem('tasksItem')|| '[]');
 
-    constructor()
+    constructor(private toast: ToastrService)
     {
 
     }
@@ -32,15 +35,12 @@ export class TaskComponent {
       this.checkIdMatching();
     }
     
-    loadData() {
+    loadData()
+     {
       this.projects = JSON.parse(localStorage.getItem('tasks') || '[]');
       this.tasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
-    
-      // console.log("Projects:", this.projects);
-      // console.log("Tasks:", this.tasks);
+     }
 
-      
-    }
     getTasksForProject(projectId: any) {
       return this.tasks.filter((task: any) => task.idproject === projectId);
     }
@@ -50,26 +50,37 @@ export class TaskComponent {
         const matchingProject = this.projects.find((project: any) => 
           project.id=== task.idproject
         );
-    
-        if (matchingProject) {
-          // console.log(` Match found: Task "${task.title}" belongs to Project "${matchingProject.title}"`);
-        } else {
-          // console.log(` No match found for Task "${task.title}" with projectId "${task.idproject}"`);
-        }
       });
     }
 
     //Delete the task.....
     deleteTask(taskid:number):void
     {
-      console.log(taskid);
-      let existingTasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
-        let deleteTask=existingTasks.filter((t:any)=>t.taskid!==taskid)
-        console.log(deleteTask);
-        localStorage.setItem('tasksItem',JSON.stringify(deleteTask))
-        alert("Deleted successfully")
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let existingTasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
+          let deleteTask=existingTasks.filter((t:any)=>t.taskid!==taskid)
+          console.log(deleteTask);
+          localStorage.setItem('tasksItem',JSON.stringify(deleteTask))
+       
+          this.toast.success('Project deleted successfully!', 'Success');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        } else {
+          this.toast.info('Deletion canceled.', 'Info');
+        }
+      });
       }
-
 
       selectedTaskID: number | null = null;
       projetcID: number | null = null;
@@ -79,10 +90,8 @@ export class TaskComponent {
         this.selectedTaskID=updatetask;
         this.projetcID=project;
         console.log(this.projetcID);
-        
 
         let existingTasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
-        // console.log(existingTasks);
         
         let update=existingTasks.find((updateid:any)=> updateid.taskid==updatetask)
         console.log(update);
@@ -94,12 +103,10 @@ export class TaskComponent {
         this.tasktime = update.time || '';
     
         console.log(this.tasktitle);
-        
       }
 
       updateSubmit()
       {
-
         console.log(this.projetcID);
         
         if(this.selectedTaskID===null)
@@ -107,9 +114,6 @@ export class TaskComponent {
           console.error("No form Updated")
           return;
         }
-      
-        // console.log(this.selectedTaskID);
-
         let taskindex=this.tasks.findIndex((taski:any)=> taski.taskid=== this.selectedTaskID)
 
         if(taskindex==-1)
@@ -133,10 +137,27 @@ export class TaskComponent {
         console.log(this.tasks);
           
           localStorage.setItem('tasksItem',JSON.stringify(this.tasks))
-
           this.selectedTaskID=null;
-          alert("Task Updated")
+          this.toast.success('Task Updated Successfuly !')
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000); 
+        }
+
+        colorchange(value:any)
+        {
+          console.log(value);
+          
+            if(value==='Pending')
+            {
+              return 'bg-danger text-light ';
+            }
+            else if(value==='In Progress'){
+              return 'bg-warning';
+
+            }
+            else{
+              return 'bg-success';
+            }
       }
-
-
 }

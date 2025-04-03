@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(private toast:ToastrService,private router:Router){}
   id=undefined;
   title:string='';
   desc: string = '';
@@ -20,7 +23,8 @@ export class HomeComponent {
   team: string = '';
   duedate:string = '';
   
-  onSubmit(event: Event) {
+
+  onSubmit(event: Event,projectForm:any) {
     event.preventDefault(); // Prevent default form submission behavior
     console.log('Title:', this.title);
     console.log('Description:', this.desc);
@@ -35,12 +39,11 @@ export class HomeComponent {
       return;
     }
     
-    // Get existing tasks from localStorage or initialize an empty array
     const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     let newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
-    // Create a new task object
+
     const newTask = {
-      id:newId, // Generate a unique ID using timestamp
+      id:newId, 
       title: this.title,
       desc: this.desc,
       created: this.created,
@@ -51,22 +54,18 @@ export class HomeComponent {
       duedate: this.duedate
     };
 
-    // Add the new task to the array
     tasks.push(newTask);
 
-    // Store the updated array back in localStorage
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    this.toast.success("Task Added Successfully !!!")
+    
+    projectForm.reset();
 
-    // Reset form fields
-    this.title = '';
-    this.desc = '';
-    this.created = '';
-    this.manager = '';
-    this.startdate = '';
-    this.enddate = '';
-    this.team = '';
-    this.duedate = '';
-
-    alert('Task added successfully!');
+    setTimeout(() => {
+      window.location.reload();
+      }, 3000);
+    
   }
+
+
 }
