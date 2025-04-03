@@ -85,6 +85,7 @@ export class ProjectComponent {
   fillUpdateForm(taskID: number) {
     this.selectedTaskID = taskID;  
     let task = this.taskdata.find(t => t.id === taskID);
+  console.log(task);
   
     if (!task) {
       console.error("Task not found!");
@@ -120,6 +121,8 @@ export class ProjectComponent {
         return;
       }
     
+      console.log(taskIndex);
+      
       // Update the task data
       this.taskdata[taskIndex] = {
         id: this.selectedTaskID,
@@ -132,7 +135,8 @@ export class ProjectComponent {
         team: this.team,
         duedate: this.duedate
       };
-    
+      console.log(this.taskdata);
+      
       // Save updated data back to localStorage
       localStorage.setItem('tasks', JSON.stringify(this.taskdata));
     
@@ -150,6 +154,7 @@ deleteTask(taskId: number): void {
 
   // Filter out the task with the given ID
   let updatedTasks = existingTasks.filter((task: any) => task.id !== taskId);
+// console.log(updatedTasks);
 
   // Update localStorage with the new list
   localStorage.setItem('tasks', JSON.stringify(updatedTasks));
