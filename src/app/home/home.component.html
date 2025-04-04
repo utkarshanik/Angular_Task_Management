@@ -1,110 +1,113 @@
 <app-navbar> </app-navbar>
-
-<div class="container-fluid d-flex justify-content-center">
-
-  <div class="card mt-5 text-center" style="width: 18rem;">
-    <img src="images/project.jpg" class="card-img-top" alt="">
-
-    <div class="card-body">
-      <h5 class="card-title">Add Project</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Add Project</a>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Project</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body mt-3">
-
-        <form class="" id="taskForm" #projectForm="ngForm" (ngSubmit)="onSubmit($event,projectForm)" novalidate>
-          <div class="row mb-3">
-            <label for="inputtitle" class="col-sm-2 col-form-label">Title</label>
-            <div class="col-sm-10">
-              <input  type="text" class="form-control" id="inputtitle" [(ngModel)]="title" name="title" #title1="ngModel" required placeholder="Title" >
-              <span class="text-danger mt-1" *ngIf="title1.invalid && title1.touched">*Provide Valid Input</span>
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <label for="desc" class="col-sm-2 col-form-label">Description</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="desc" rows="3" [(ngModel)]="desc" name="desc" #desc1="ngModel" required  placeholder="Description"></textarea>
-              <span class="text-danger mt-1" *ngIf="desc1.invalid && desc1.touched">*Provide Valid Input</span>
- 
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputtaskname" class="col-sm-2 col-form-label required">Created By</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputtaskname" [(ngModel)]="created" name="created" #created1="ngModel" required placeholder="Created by">
-              <span class="text-danger mt-1" *ngIf="created1.invalid && created1.touched">*Provide Valid Input</span>
-
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputmanager" class="col-sm-2 col-form-label required">Project Manager</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputmanager" [(ngModel)]="manager" name="manager" #manager1="ngModel" required placeholder="Project Manager">
-              <span class="text-danger mt-1" *ngIf="manager1.invalid && manager1.touched">*Provide Valid Input</span>
-
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="startdate" [(ngModel)]="startdate" name="startdate" #startdate1="ngModel" required>
-              <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
-
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <label for="enddate" class="col-sm-2 col-form-label">End Date</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="enddate" [(ngModel)]="enddate" name="enddate" #enddate1="ngModel" required>
-              <span class="text-danger mt-1" *ngIf="enddate1.invalid && enddate1.touched">*Provide Valid Input</span>
-
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <label for="inputmanager" class="col-sm-2 col-form-label required">Team Members</label>
-            <div class="col-sm-10">
-              <input type="number" min="0" class="form-control" id="inputmanager" [(ngModel)]="team" name="team" #team1="ngModel" required 
-              placeholder="Team Members">
-              
-              <span class="text-danger mt-1" *ngIf="team1.invalid && team1.touched">*Provide Valid Input</span>
-
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="duedate" class="col-sm-2 col-form-label" >Due Date</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="duedate" [(ngModel)]="duedate" name="duedate" #duedate1="ngModel" required>
-              <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
-            </div>
-          </div>
-
-        <div class="modal-footer mt-3">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid data-bs-dismiss="modal">Submit</button>
-        </div>
-        </form>
-      </div>
+<body style="background-color: #543f3f33;">
+  
+  <div class="container-fluid d-flex justify-content-center">
+    
+    <div class="card mt-5 text-center" style="width: 18rem;">
+      <img src="images/project.jpg" class="card-img-top" alt="">
       
+      <div class="card-body">
+        <h5 class="card-title">Add Project</h5>
+        <p class="card-text">Please add your project details, including the name, description, start and end dates, and current status.</p>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Add Project</a>
+      </div>
     </div>
   </div>
-
-</div>
+  
+  <!-- Modal -->
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Project</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body mt-3">
+          
+          <form class="" id="taskForm" #projectForm="ngForm" (ngSubmit)="onSubmit($event,projectForm)" novalidate>
+            <div class="row mb-3">
+              <label for="inputtitle" class="col-sm-2 col-form-label">Title</label>
+              <div class="col-sm-10">
+                <input  type="text" class="form-control" id="inputtitle" [(ngModel)]="title" name="title" #title1="ngModel" required placeholder="Title" >
+                <span class="text-danger mt-1" *ngIf="title1.invalid && title1.touched">*Provide Valid Input</span>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="desc" class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" id="desc" rows="3" [(ngModel)]="desc" name="desc" #desc1="ngModel" required  placeholder="Description"></textarea>
+                <span class="text-danger mt-1" *ngIf="desc1.invalid && desc1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="inputtaskname" class="col-sm-2 col-form-label required">Created By</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputtaskname" [(ngModel)]="created" name="created" #created1="ngModel" required placeholder="Created by">
+                <span class="text-danger mt-1" *ngIf="created1.invalid && created1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="inputmanager" class="col-sm-2 col-form-label required">Project Manager</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputmanager" [(ngModel)]="manager" name="manager" #manager1="ngModel" required placeholder="Project Manager">
+                <span class="text-danger mt-1" *ngIf="manager1.invalid && manager1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="startdate" [(ngModel)]="startdate" name="startdate" #startdate1="ngModel" required>
+                <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="enddate" class="col-sm-2 col-form-label">End Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="enddate" [(ngModel)]="enddate" name="enddate" #enddate1="ngModel" required>
+                <span class="text-danger mt-1" *ngIf="enddate1.invalid && enddate1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="inputmanager" class="col-sm-2 col-form-label required">Team Members</label>
+              <div class="col-sm-10">
+                <input type="number" min="0" class="form-control" id="inputmanager" [(ngModel)]="team" name="team" #team1="ngModel" required 
+                placeholder="Team Members">
+                
+                <span class="text-danger mt-1" *ngIf="team1.invalid && team1.touched">*Provide Valid Input</span>
+                
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="duedate" class="col-sm-2 col-form-label" >Due Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="duedate" [(ngModel)]="duedate" name="duedate" #duedate1="ngModel" required>
+                <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
+              </div>
+            </div>
+            
+            <div class="modal-footer mt-3">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid data-bs-dismiss="modal">Submit</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+</body>

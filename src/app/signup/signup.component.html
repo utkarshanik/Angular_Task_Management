@@ -1,7 +1,7 @@
 
 
-<div class="d-flex justify-content-center align-items-center vh-100">
-  <div class="container bg-secondary-subtle p-4 rounded shadow" style="max-width: 400px; ">
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-color: dimgrey;">
+  <div class="container  p-4 rounded shadow" style="max-width: 400px; background-color:gainsboro;   ">
     <h2 class="text-center m-3">Sign UP</h2>
 
     <form (ngSubmit)="onSubmit()" #signinForm="ngForm" class="needs-validation mt-4" novalidate>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="form-floating mt-3">
-        <a [routerLink]="['/login'] ">Login</a>
+        <a class="text-dark" [routerLink]="['/login'] ">Login</a>
         <!-- <a [routerLink]="['/sign']" routerLinkActive="router-link-active" ]>Sign Up</a> -->
       </div>
 
