@@ -2,11 +2,11 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink,RouterOutlet,RouterLinkActive,FormsModule,NgIf],
+  imports: [RouterLink,RouterOutlet,RouterLinkActive,FormsModule,NgIf,ToastrModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -22,7 +22,8 @@ export class LoginComponent {
 
     if(match)
     {
-      this.toastr.success(`Login successful ${this.username} !`, 'Success');
+      this.toastr.success(`Login successful <span class="toastr-username");">${this.username}</span> !`, 'Success', {enableHtml:true});
+     
       this.router.navigate(['/home']);
     }
     else
