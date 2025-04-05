@@ -84,9 +84,9 @@
             </div>
   
             <div class="row mb-3">
-              <label for="inputmanager" class="col-sm-2 col-form-label required">Project Manager</label>
+              <label for="project" class="col-sm-2 col-form-label required">Project Manager</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputmanager" [(ngModel)]="manager" name="manager" #manager1="ngModel" required placeholder="Project Manager">
+                <input type="text" class="form-control" id="project" [(ngModel)]="manager" name="manager" #manager1="ngModel" required placeholder="Project Manager">
                 <!-- <span class="text-danger mt-2" *ngIf="manager1.touched || manager1.invalid">*Provide valid data</span> -->
 
               </div>
@@ -113,9 +113,9 @@
             </div>
             
             <div class="row mb-3">
-              <label for="inputmanager" class="col-sm-2 col-form-label required">Team Members</label>
+              <label for="team" class="col-sm-2 col-form-label required">Team Members</label>
               <div class="col-sm-10">
-                <input type="number" class="form-control" id="inputmanager" [(ngModel)]="team" name="team" #team1="ngModel" required placeholder="Team Members">
+                <input type="number" class="form-control" id="team" [(ngModel)]="team" name="team" #team1="ngModel" required placeholder="Team Members">
                 <!-- <span class="text-danger mt-2" *ngIf="team1.touched || team1.invalid">*Provide valid data</span> -->
 
               </div>
@@ -184,9 +184,9 @@
               </div>
   
             <div class="row mb-3">
-              <label for="inputmanager" class="col-sm-2 col-form-label required">Estimate</label>
+              <label for="team" class="col-sm-2 col-form-label required">Estimate</label>
               <div class="col-sm-10">
-                <input type="time" class="form-control" id="taskinputmanager" [(ngModel)]="taskmanager" name="taskmanager" #taskmanager1="ngModel" required placeholder="Estimate">
+                <input type="time" class="form-control" id="team" [(ngModel)]="taskmanager" name="taskmanager" #taskmanager1="ngModel" required placeholder="Estimate">
               <span class="text-danger mt-1" *ngIf="taskmanager1.invalid && taskmanager1.touched">*Provide Valid Input</span>
 
               </div>

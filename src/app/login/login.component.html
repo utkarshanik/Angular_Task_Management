@@ -1,10 +1,8 @@
-
-
 <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: gainsboro;">
   <div class="container  p-4 rounded shadow" style="max-width: 400px;background-color: dimgrey; ">
     <h2 class="text-center m-3  text-light">Login</h2>
 
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="needs-validation mt-4" novalidate>
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="needs-validation mt-4" novalidate>
 
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" ngModel required>

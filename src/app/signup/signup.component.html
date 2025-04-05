@@ -4,7 +4,7 @@
   <div class="container  p-4 rounded shadow" style="max-width: 400px; background-color:gainsboro;   ">
     <h2 class="text-center m-3">Sign UP</h2>
 
-    <form (ngSubmit)="onSubmit()" #signinForm="ngForm" class="needs-validation mt-4" novalidate>
+    <form (ngSubmit)="onSubmit(signinForm)" #signinForm="ngForm" class="needs-validation mt-4" novalidate>
 
       <div class="form-floating mb-3">
         <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" ngModel required>

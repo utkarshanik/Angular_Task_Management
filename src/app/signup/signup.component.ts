@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -16,35 +17,28 @@ export class SignupComponent {
   username:string="";
   password:string=""
 
-  constructor(private toastr:ToastrService,private router:Router){}
-  onSubmit()
-  {
-    let userData= JSON.parse(localStorage.getItem('user') || '[]');
-    
-    let match=userData.find((matchingpair:any) => matchingpair.username === this.username);
+  constructor(private toastr:ToastrService,private router:Router, private auth:AuthenticationService){}
 
+  onSubmit(signinForm:any)
+  {
+    let match=this.auth.userExist(this.username)
     if(match)
     {
-      this.toastr.error('User Already Exist !!', 'Error');
-      
+      this.toastr.warning('User Already Exist !!', 'Warning');
     }
     else
     {
-      let details=
+        let match=this.auth.sign(this.username,this.password)
+      if(match)
       {
-        username:this.username,
-        password:this.password
+        this.toastr.success(`Sign Up successful ${this.username} !`, 'Success');
+        this.router.navigate(['/login']);
+        signinForm.reset();
       }
-      userData.push(details);
-      localStorage.setItem('user',JSON.stringify(userData));
-      this.toastr.success(`Sign Up successful ${this.username} !`, 'Success');
-      setTimeout(() => {
-        this.router.navigate(['/login'])
-      }, 3500);
+      else
+      {
+        this.toastr.error('Some Error Occured!!', 'Error');
+      }
     }
-
-
   }
-
-
 }

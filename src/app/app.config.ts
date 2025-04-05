@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-center', 
       timeOut: 1500, 
       closeButton: true,
-      // enableHtml: true
+      enableHtml: true
       // progressBar: true
     }),]
 };
