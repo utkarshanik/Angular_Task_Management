@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FilterProjectsPipe } from '../pipe/filter-projects.pipe';
 
@@ -151,35 +151,35 @@ export class ProjectComponent {
   }
 
   //Deleting the data...
-  deleteTask(taskId: number): void {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
+  // deleteTask(taskId: number): void {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: 'You won\'t be able to revert this!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#d33',
+  //     cancelButtonColor: '#3085d6',
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'No, cancel'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
 
-        let existingTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  //       let existingTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
 
-        let updatedTasks = existingTasks.filter((task: any) => task.id !== taskId);
+  //       let updatedTasks = existingTasks.filter((task: any) => task.id !== taskId);
 
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  //       localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 
 
-        this.toast.success('Project deleted successfully!', 'Success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
-      } else {
-        this.toast.info('Deletion canceled.', 'Info');
-      }
-    });
-  }
+  //       this.toast.success('Project deleted successfully!', 'Success');
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 3000);
+  //     } else {
+  //       this.toast.info('Deletion canceled.', 'Info');
+  //     }
+  //   });
+  // }
 
   viewtask(taskId: string)
    {
