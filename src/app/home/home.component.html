@@ -73,7 +73,8 @@
               <div class="col-sm-10">
                 <input type="date" class="form-control" id="enddate" [(ngModel)]="enddate" name="enddate" #enddate1="ngModel" required>
                 <span class="text-danger mt-1" *ngIf="enddate1.invalid && enddate1.touched">*Provide Valid Input</span>
-                
+                <span class="text-danger mt-1" *ngIf="dateError">{{ dateError }}</span>
+
               </div>
             </div>
             
@@ -97,8 +98,11 @@
             </div>
             
             <div class="modal-footer mt-3">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid data-bs-dismiss="modal">Submit</button>
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <!-- Add this inside .modal-footer (hidden button for closing modal) -->
+<button #closeModalBtn type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid  >Submit</button>
             </div>
         </form>
         </div>
