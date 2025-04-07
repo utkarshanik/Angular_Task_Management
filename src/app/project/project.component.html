@@ -3,9 +3,18 @@
 
 <div class="container-fluid mt-3">
   <h3 class="data-item" >All Project</h3>
-  <div>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+  <div class="col-3">
+    <!-- <form class="d-flex" role="search"> -->
+      <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" > -->
+      <form class="d-flex" (ngSubmit)="onSearch($event)" role="search">
+
+      <input class="form-control me-2"
+       type="search"
+       placeholder="Search by Title"
+       aria-label="Search"
+       [(ngModel)]="searchText"
+       name="searchText">
+
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
@@ -30,8 +39,11 @@
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody class="showdata ">
-          <tr *ngFor="let task of taskdata">
+        <!-- <tbody class="showdata ">
+          <tr *ngFor="let task of taskdata"> -->
+            <tbody class="showdata">
+              <tr *ngFor="let task of taskdata | filterProjects:searchText">
+            
             <th scope="row" class="data-item">{{task.id}}</th> 
             <td class="data-item">{{task.title}}</td>
             <td class="data-item">{{task.desc}}</td>

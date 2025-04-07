@@ -1,23 +1,24 @@
 import { Component, NgModule } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { takeLast } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FilterProjectsPipe } from '../pipe/filter-projects.pipe';
 
 
 @Component({
   selector: 'app-project',
-  imports: [NavbarComponent, NgFor, FormsModule, NgIf],
+  imports: [NavbarComponent, NgFor, FormsModule, NgIf,FilterProjectsPipe],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
 
 export class ProjectComponent {
-
   constructor(private toast: ToastrService,private router: Router) { }
+  searchText: string = '';
+
   //For Task Details
   taskid = undefined;
   tasktitle: string = '';
@@ -43,6 +44,10 @@ export class ProjectComponent {
     console.log(project);
     this.projetcid = project;
   }
+  onSearch(event: Event) {
+    event.preventDefault();
+  }
+  
 
   onSubmit(event: Event, form: any) {
     event.preventDefault(); // Prevent default form submission behavior
