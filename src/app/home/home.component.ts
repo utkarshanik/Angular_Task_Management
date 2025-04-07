@@ -27,16 +27,23 @@ export class HomeComponent {
   duedate:string = '';
   
   dateError: string = '';
-  onSubmit(event: Event, projectForm: any) {
-    event.preventDefault();
-
-    this.dateError = '';
+validateDates() {
+  if (this.startdate && this.enddate) {
     const start = new Date(this.startdate);
     const end = new Date(this.enddate);
+    const due=new Date(this.duedate)
     if (end < start) {
       this.dateError = 'End date should be after or equal to Start date';
-      return;
+    } else {
+      this.dateError = ''; // Clear error if valid
     }
+    
+  } else {
+    this.dateError = ''; // Clear error if any date is missing
+  }
+}
+  onSubmit(event: Event, projectForm: any) {
+    event.preventDefault();
 
     let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     let maxId = tasks.length > 0 ? Math.max(...tasks.map((task: any) => task.id)) : 0;
