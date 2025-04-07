@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ProjectDataService } from '../services/project-data.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private toast:ToastrService,private router:Router){}
+  constructor(private toast:ToastrService,private router:Router,private addProject:ProjectDataService){}
+
   id=undefined;
   title:string='';
   desc: string = '';
@@ -24,24 +26,14 @@ export class HomeComponent {
   duedate:string = '';
   
   
-  onSubmit(event: Event,projectForm:any) {
+  onSubmit(event: Event,projectForm:any) 
+  {
     event.preventDefault(); // Prevent default form submission behavior
-    console.log('Title:', this.title);
-    console.log('Description:', this.desc);
-    console.log('Created By:', this.created);
-    console.log('Manager:', this.manager);
-    console.log('Start Date:', this.startdate);
-    console.log('End Date:', this.enddate);
-    console.log('Team:', this.team);
-    console.log('Due Date:', this.duedate);
-    if (!this.title || !this.desc || !this.created || !this.manager || !this.startdate || !this.enddate || !this.team || !this.duedate) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    let newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
-    
+    let tasks=JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    let maxId= tasks.length > 0 ? Math.max(...tasks.map((task:any)=>task.id)) :0;
+    let newId=maxId+1;
+
     const newTask = {
       id:newId, 
       title: this.title,
@@ -54,17 +46,13 @@ export class HomeComponent {
       duedate: this.duedate
     };
     
-    tasks.push(newTask);
+    let a= this.addProject.addProject(newTask)
+    if(a)
+    {
+       this.toast.success("Task Added Successfully !!!")
+        projectForm.reset();
+    }
     
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    this.toast.success("Task Added Successfully !!!")
-    
-    
-
     projectForm.reset();
-  
-    
   }
-  
-  
 }

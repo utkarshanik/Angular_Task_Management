@@ -4,6 +4,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,41 +17,54 @@ import Swal from 'sweetalert2';
 export class TaskComponent {
   
   tasktitle:string='';
-  taskdesc: string = '';
-  taskcreated: string = '';
-  taskmanager: string = '';
+  taskdesc:string = '';
+  taskcreated:string = '';
+  taskmanager:string = '';
   tasktime:string = '';
   projetcid:string='';
-
-    projects:any=JSON.parse(localStorage.getItem('tasks') || '[]')
-    tasks:any=JSON.parse(localStorage.getItem('tasksItem')|| '[]');
-
-    constructor(private toast: ToastrService)
-    {
-
-    }
-
+  projecttitle:string='';
+  proid: string = '';
+  
+  taskList: any[] = [];
+  projectList: any[] = [];
+  projects: any[] = [];
+  tasks: any[] = [];
+  
+  // projects:any=JSON.parse(localStorage.getItem('tasks') || '[]')
+  // tasks:any=JSON.parse(localStorage.getItem('tasksItem')|| '[]');
+  
+  constructor(private toast: ToastrService, private route :ActivatedRoute){  }
+  
+  // proid:string='';
     ngOnInit() {
       this.loadData();
-      this.checkIdMatching();
+      // this.checkIdMatching();
+      this.route.queryParams.subscribe(params => {
+        this.proid = params['projectid'];
+        this.loadTasksForProject();
+      });
     }
-    
-    loadData()
-     {
+
+    loadData() {
       this.projects = JSON.parse(localStorage.getItem('tasks') || '[]');
       this.tasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
-     }
-
-    getTasksForProject(projectId: any) {
-      return this.tasks.filter((task: any) => task.idproject === projectId);
     }
     
-    checkIdMatching() {
-      this.tasks.forEach((task: any) => { // Explicitly typing 'task' as 'any'
-        const matchingProject = this.projects.find((project: any) => 
-          project.id=== task.idproject
-        );
-      });
+    loadTasksForProject() {
+      this.taskList = this.tasks.filter(task => task.idproject == this.proid);
+      this.projectList = this.projects.filter(task => task.id == this.proid );
+      this.projecttitle=this.projectList[0].title;
+      // console.log(this.projectList[0].title);
+      
+      
+      if (this.taskList.length === 0) {
+        this.toast.error("No task found", "Error");
+      }
+
+    }
+    
+    getTasksForProject() {
+      return this.taskList;
     }
 
     //Delete the task.....
@@ -81,12 +95,13 @@ export class TaskComponent {
       }
 
       selectedTaskID: number | null = null;
-      projetcID: number | null = null;
-      updateTask(updatetask:any,project:any)
+      projetcID: any ='';
+      
+      updateTask(updatetask:any)
       {
         console.log(updatetask);
         this.selectedTaskID=updatetask;
-        this.projetcID=project;
+        this.projetcID=this.proid;
         console.log(this.projetcID);
 
         let existingTasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
@@ -100,7 +115,7 @@ export class TaskComponent {
         this.taskmanager = update.manager || '';
         this.tasktime = update.time || '';
     
-        console.log(this.tasktitle);
+        // console.log(this.tasktitle);
       }
 
       updateSubmit()
@@ -112,9 +127,10 @@ export class TaskComponent {
           console.error("No form Updated")
           return;
         }
+
         let taskindex=this.tasks.findIndex((taski:any)=> taski.taskid=== this.selectedTaskID)
 
-        if(taskindex==-1)
+        if(taskindex===-1)
         {
           console.error("Task not found in localStorage!");
           return;
@@ -137,15 +153,14 @@ export class TaskComponent {
           localStorage.setItem('tasksItem',JSON.stringify(this.tasks))
           this.selectedTaskID=null;
           this.toast.success('Task Updated Successfuly !')
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000); 
+
+          this.loadData();               // Reload localStorage into tasks array
+          this.loadTasksForProject(); 
+       
         }
 
         colorchange(value:any)
         {
-          console.log(value);
-          
             if(value==='Pending')
             {
               return 'bg-danger text-light ';

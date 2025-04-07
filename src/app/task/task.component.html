@@ -1,47 +1,50 @@
 <app-navbar></app-navbar>
 <div class="container mt-5">
-  <h3 class="text-center mb-4">All Projects & Tasks</h3>
+  <h3 class="text-center mb-4">Project & Tasks</h3>
 
-  <div *ngFor="let project of projects" class="mb-4">
-    <h4 class="fw-bold text-secondary"><span class="text-dark">Project Name :-</span> {{ project.title }}</h4> <!-- Display Project Title -->
+<div class="mb-4">
+  <div *ngIf="getTasksForProject().length > 0; else noTask">
+  <h1>Project Title:- <span class="text-secondary"> {{projecttitle}} </span></h1>
 
-    <div *ngIf="getTasksForProject(project.id).length > 0; else noTask">
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Title</th>
-              <th scope="col">Assigned To</th>
-              <th scope="col">Status</th>
-              <th scope="col">Estimate</th>
-              <th scope="col">Time Spent</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let task of getTasksForProject(project.id)">
-              <th scope="row">{{ task.taskid }}</th>
-              <td class="col-3">{{ task.title }}</td>
-              <td class="col-2">{{ task.desc }}</td>
-              <td [ngClass]="colorchange(task.created)">{{ task.created }}</td> 
-              <td>{{ task.manager }}</td>
-              <td>{{ task.time }}</td>
-
-              <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" (click)="updateTask(task.taskid,project.id)" data-bs-target="#taskModal">Update</button></td>
-              <td> <button class="btn btn-danger btn-delete" (click)="deleteTask(task.taskid)" type="button">Delete</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>No</th>
+            <th>Title</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Estimate</th>
+            <th>Time Spent</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of getTasksForProject()">
+            <th>{{ task.taskid }}</th>
+            <td>{{ task.title }}</td>
+            <td>{{ task.desc }}</td>
+            <td [ngClass]="colorchange(task.created)">{{ task.created }}</td>
+            <td>{{ task.manager }}</td>
+            <td>{{ task.time }}</td>
+            <td>
+              <button class="btn btn-success" (click)="updateTask(task.taskid)" data-bs-toggle="modal" data-bs-target="#taskModal">Update</button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteTask(task.taskid)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <ng-template #noTask>
-      <p class="text-muted">No tasks found for this project.</p>
-    </ng-template>
   </div>
+
+  <ng-template #noTask>
+    <p class="text-center update">No tasks added for this project.</p>
+  </ng-template>
 </div>
+
 
 <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -57,7 +60,6 @@
             <label for="inputtitle" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
               <input  type="text" class="form-control" id="taskinputtitle" [(ngModel)]="tasktitle" name="tasktitle" #tasktitle1="ngModel" required placeholder="Title" >
-                <!-- <span class="text-danger mt-2" *ngIf="tasktitle1.touched || tasktitle1.invalid">*Provide valid data</span> -->
               
             </div>
           </div>
@@ -80,7 +82,7 @@
                   <option selected>Select option</option>
                   <option value="Completed">Completed</option>
                   <option value="Pending">Pending</option>
-                  <option value="Pending">In Progress</option>
+                  <option value="In Progress">In Progress</option>
                 </select>
                 <!-- <span class="text-danger mt-2" *ngIf="taskcreated1.touched || taskcreated1.invalid">*Provide valid data</span> -->
 

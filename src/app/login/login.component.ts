@@ -22,11 +22,13 @@ export class LoginComponent {
     let result= this.auth.login(this.username,this.password);  
       if(result)
       {
+        console.log(result);
         this.toastr.success(`Login Succeessful <span class=" toastr-username">${this.username}</span> !!!`,'success')
         this.router.navigate(['/home']);
       }
       else
       {
+        console.log(result);
         this.toastr.error(`Invalid Credentials`,'Error')
         loginForm.reset();
       }

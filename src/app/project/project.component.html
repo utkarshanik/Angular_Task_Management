@@ -3,7 +3,12 @@
 
 <div class="container-fluid mt-3">
   <h3 class="data-item" >All Project</h3>
-
+  <div>
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
   <div class="p-2" id="liveAlertPlaceholderr"> </div>
 
   <div class="table-responsive ">
@@ -21,6 +26,7 @@
             <th scope="col">Due Date</th>
             <th scope="col">Edit</th>
             <th scope="col">Add Task</th>
+            <th scope="col">View Task</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
@@ -39,6 +45,8 @@
             <td ><button type="button" class="btn btn-success btn-update"  (click)="fillUpdateForm(task.id)" data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#exampleModal">Update</button></td>
 
             <td ><button type="button" class="btn btn-success btn-update"  data-bs-toggle="modal" data-updateid=${task.task_id} data-bs-target="#taskModal" (click)="addtask(task.id)">Add Task</button></td>
+
+            <td ><button type="button" class="btn btn-success btn-update"  (click)="viewtask(task.id)">View Task</button></td>
 
             <td> <button class="btn btn-danger btn-delete  " data-deleteid=${task.task_id} (click)="deleteTask(task.id)" type="button">Delete</button></td>
             </tr> 
@@ -91,8 +99,6 @@
 
               </div>
             </div>
-            
-            
             
             <div class="row mb-3">
               <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>

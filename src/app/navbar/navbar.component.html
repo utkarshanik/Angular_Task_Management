@@ -14,10 +14,13 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/project']" routerLinkActive="router-link-active"  href="">View Project</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" [routerLink]="['/task']" routerLinkActive="router-link-active" >View Task</a>
-        </li>
+        </li> -->
       </ul>
+      <button class="btn btn-light mb-2 m-md-0" (click)="toggleDarkMode()">
+        {{ isDarkMode ? ' Light Mode' : ' Dark Mode' }}
+      </button>
     </div>
 
   </div>

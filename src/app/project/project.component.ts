@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 
 export class ProjectComponent {
 
-  constructor(private toast: ToastrService,) { }
+  constructor(private toast: ToastrService,private router: Router) { }
   //For Task Details
   taskid = undefined;
   tasktitle: string = '';
@@ -104,9 +105,7 @@ export class ProjectComponent {
   }
 
   AddUpdate() {
-
     // Prevent default form submission behavior
-
     if (this.selectedTaskID === null) {
       console.error("No task selected for update!");
       return;
@@ -146,9 +145,6 @@ export class ProjectComponent {
 
   }
 
-
-
-
   //Deleting the data...
   deleteTask(taskId: number): void {
     Swal.fire({
@@ -179,5 +175,14 @@ export class ProjectComponent {
       }
     });
   }
+
+  viewtask(taskId: string)
+   {
+        this.router.navigate(['/task'],{
+        queryParams: { projectid:taskId}
+      })
+    
+    } 
+
 
 }

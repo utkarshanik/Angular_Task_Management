@@ -1,8 +1,7 @@
 <app-navbar> </app-navbar>
 <body style="background-color: #543f3f33;">
-  
+  <!---------- Card Details -------------->
   <div class="container-fluid d-flex justify-content-center">
-    
     <div class="card mt-5 text-center" style="width: 18rem;">
       <img src="images/project.jpg" class="card-img-top" alt="">
       
@@ -14,8 +13,7 @@
     </div>
   </div>
   
-  <!-- Modal -->
-  
+  <!-----------Add Projec t form Modal------------------>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -25,7 +23,8 @@
         </div>
         <div class="modal-body mt-3">
           
-          <form class="" id="taskForm" #projectForm="ngForm" (ngSubmit)="onSubmit($event,projectForm)" novalidate>
+        <form class="" id="taskForm" #projectForm="ngForm" (ngSubmit)="onSubmit($event,projectForm)" novalidate>
+          
             <div class="row mb-3">
               <label for="inputtitle" class="col-sm-2 col-form-label">Title</label>
               <div class="col-sm-10">
@@ -39,7 +38,6 @@
               <div class="col-sm-10">
                 <textarea class="form-control" id="desc" rows="3" [(ngModel)]="desc" name="desc" #desc1="ngModel" required  placeholder="Description"></textarea>
                 <span class="text-danger mt-1" *ngIf="desc1.invalid && desc1.touched">*Provide Valid Input</span>
-                
               </div>
             </div>
             
@@ -102,12 +100,10 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid data-bs-dismiss="modal">Submit</button>
             </div>
-          </form>
+        </form>
         </div>
-        
       </div>
     </div>
-    
   </div>
   
 </body>
