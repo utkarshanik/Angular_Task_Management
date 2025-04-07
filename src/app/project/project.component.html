@@ -3,20 +3,35 @@
 
 <div class="container-fluid mt-3">
   <h3 class="data-item" >All Project</h3>
-  <div class="col-3">
-    <!-- <form class="d-flex" role="search"> -->
-      <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" > -->
+  <div class="col-12 d-flex">
+    <div class="col-3 me-6">
       <form class="d-flex" (ngSubmit)="onSearch($event)" role="search">
-
-      <input class="form-control me-2"
-       type="search"
-       placeholder="Search by Title"
-       aria-label="Search"
-       [(ngModel)]="searchText"
-       name="searchText">
-
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+        <input class="form-control me-2 flex-grow-1"
+          type="search"
+          placeholder="Search by Title"
+          aria-label="Search"
+          [(ngModel)]="searchText"
+          name="searchText">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  <div class="col-8 ms-2  d-flex"> 
+      <div class="col-4 me-2 d-flex justify-content-start align-items-center">
+        <label for="sortField" class="form-label col-2">Sort By:</label>
+        <select class="form-select" [(ngModel)]="sortField" name="sortField">
+          <option value="title">Title</option>
+          <option value="startdate">Start Date</option>
+          <option value="enddate">End Date</option>
+        </select>
+      </div>
+      <div class="col-4 me-2 d-flex justify-content-start align-items-center">
+        <label for="sortOrder" class="form-label col-2">Order:</label>
+        <select class="form-select" [(ngModel)]="sortOrder" name="sortOrder">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="p-2" id="liveAlertPlaceholderr"> </div>
 
@@ -42,7 +57,7 @@
         <!-- <tbody class="showdata ">
           <tr *ngFor="let task of taskdata"> -->
             <tbody class="showdata">
-              <tr *ngFor="let task of taskdata | filterProjects:searchText">
+              <tr *ngFor="let task of taskdata | sortData: sortField : sortOrder | filterProjects:searchText">
             
             <th scope="row" class="data-item">{{task.id}}</th> 
             <td class="data-item">{{task.title}}</td>

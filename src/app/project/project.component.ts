@@ -6,18 +6,23 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FilterProjectsPipe } from '../pipe/filter-projects.pipe';
+import { SortDataPipe } from '../pipe/sort-data.pipe';
 
 
 @Component({
   selector: 'app-project',
-  imports: [NavbarComponent, NgFor, FormsModule, NgIf,FilterProjectsPipe],
+  imports: [NavbarComponent, NgFor, FormsModule, NgIf,FilterProjectsPipe,SortDataPipe],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
 
 export class ProjectComponent {
   constructor(private toast: ToastrService,private router: Router) { }
+  //Serach
   searchText: string = '';
+  //Sort 
+  sortField: string = 'title';
+sortOrder: 'asc' | 'desc' = 'asc';
 
   //For Task Details
   taskid = undefined;
