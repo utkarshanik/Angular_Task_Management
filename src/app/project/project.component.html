@@ -1,6 +1,4 @@
 <app-navbar></app-navbar>
-
-
 <div class="container-fluid mt-3">
   <h3 class="data-item" >All Project</h3>
   <div class="col-12 d-flex">
@@ -57,7 +55,10 @@
         <!-- <tbody class="showdata ">
           <tr *ngFor="let task of taskdata"> -->
             <tbody class="showdata">
-              <tr *ngFor="let task of taskdata | sortData: sortField : sortOrder | filterProjects:searchText">
+              <tr *ngFor="let task of taskdata | sortData: sortField : sortOrder | filterProjects:searchText ; let i = index"     draggable="true"
+              (dragstart)="dragStart(i)"
+              (dragover)="allowDrop($event)"
+              (drop)="drop(i)">
             
             <th scope="row" class="data-item">{{task.id}}</th> 
             <td class="data-item">{{task.title}}</td>

@@ -17,6 +17,22 @@ import { SortDataPipe } from '../pipe/sort-data.pipe';
 })
 
 export class ProjectComponent {
+  draggedItemIndex: number = -1;
+
+dragStart(index: number) {
+  this.draggedItemIndex = index;
+}
+
+allowDrop(event: DragEvent) {
+  event.preventDefault();
+}
+
+drop(targetIndex: number) {
+  const draggedItem = this.taskdata[this.draggedItemIndex];
+  this.taskdata.splice(this.draggedItemIndex, 1); // Remove from old position
+  this.taskdata.splice(targetIndex, 0, draggedItem); // Insert at new position
+}
+
   constructor(private toast: ToastrService,private router: Router) { }
   //Serach
   searchText: string = '';

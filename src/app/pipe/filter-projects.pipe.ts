@@ -17,5 +17,4 @@ export class FilterProjectsPipe implements PipeTransform {
     );
   }
   
-
 }
