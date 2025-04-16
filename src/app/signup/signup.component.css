@@ -1,10 +1,23 @@
 .signup-container {
-    background-color: dimgrey;
-}
+    /* background-color: dimgrey; */
+    background: -webkit-linear-gradient(#8CA6DB, #B993D6);
+    background: linear-gradient(#8CA6DB, #B993D6);  
+    }
+    
+
 
 .signup-form-container {
     max-width: 400px;
-    background-color: gainsboro;
+    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    background-attachment: fixed;
+      background-repeat: no-repeat;
+    
+        font-family: 'Vibur', cursive;
+    /*   the main font */
+        font-family: 'Abel', sans-serif;
+    opacity: .95;
+    /* background-color: gainsboro; */
 }
 
 .signup-heading {
