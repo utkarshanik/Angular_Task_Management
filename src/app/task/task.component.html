@@ -21,8 +21,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let task of getTasksForProject()">
-            <th>{{ task.taskid }}</th>
+          <tr *ngFor="let task of getTasksForProject(); let i=index">
+            <th scope="row" class="data-item">{{i + 1}}</th>
             <td>{{ task.title }}</td>
             <td>{{ task.desc }}</td>
             <td [ngClass]="colorchange(task.created)">{{ task.created }}</td>

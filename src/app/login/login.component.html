@@ -1,33 +1,40 @@
-<div class="d-flex justify-content-center align-items-center vh-100" style="background-color: gainsboro;">
-  <div class="container  p-4 rounded shadow" style="max-width: 400px;background-color: dimgrey; ">
-    <h2 class="text-center m-3  text-light">Login</h2>
+<div class="d-flex justify-content-center align-items-center vh-100 login-container">
+  <div class="container p-4 rounded shadow login-form-container">
+    <h2 class="text-center m-3 login-heading">Login</h2>
 
     <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="needs-validation mt-4" novalidate>
-
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" [(ngModel)]="username" name="username"  #usernameInput="ngModel" id="floatingInput" placeholder="name@example.com" ngModel required>
-        <span class="text-warning" *ngIf="usernameInput.invalid && usernameInput.touched">*Provide Valid Name</span>
+        <input type="text" class="form-control" [(ngModel)]="username" name="username" #usernameInput="ngModel" 
+          id="floatingInput" placeholder="Username" required>
+        <span class="validation-message" *ngIf="usernameInput.invalid && usernameInput.touched">*Provide Valid Name</span>
         <label for="floatingInput">Username</label>
       </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" [(ngModel)]="email" name="email" #emailInput="ngModel" 
+          id="floatingEmail" placeholder="Email" required 
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <span class="validation-message" *ngIf="emailInput.invalid && emailInput.touched">
+          *Please enter a valid email address
+        </span>
+        <label for="floatingEmail">Email</label>
+      </div>
       
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required [(ngModel)]="password" name="password" required #passwordInput="ngModel">
-        <span class="text-warning" *ngIf="passwordInput.invalid && passwordInput.touched">*Provide Valid Password</span>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" 
+          required [(ngModel)]="password" name="password" #passwordInput="ngModel">
+        <span class="validation-message" *ngIf="passwordInput.invalid && passwordInput.touched">*Provide Valid Password</span>
         <label for="floatingPassword">Password</label>
       </div>
 
-      <div class="form-floating mt-3">
-        <a [routerLink]="['/sign'] " class=" text-light">Sign Up</a>
-        <!-- <a [routerLink]="['/sign']" routerLinkActive="router-link-active" ]>Sign Up</a> -->
+      <div class="form-floating mt-3 d-flex justify-content-between">
+        <a [routerLink]="['/sign']" class="link-text">Sign Up</a>
+        <a href="javascript:void(0)" (click)="forgotPassword()" class="link-text">Forgot Password?</a>
       </div>
 
       <div class="col-12 text-center mt-4">
-        <!-- Submit Button -->
-        <!-- <button type="submit" class="btn btn-dark"> <a [routerLink]="['/home']" routerLinkActive="router-link-active">Submit</a></button> -->
-        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-dark" >Submit</button>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn submit-button">Submit</button>
       </div>
-      
     </form>
   </div>
 </div>
-

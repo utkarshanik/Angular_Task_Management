@@ -6,14 +6,14 @@
       <img src="images/project.jpg" class="card-img-top" alt="">
       
       <div class="card-body">
-        <h5 class="card-title">Add Project</h5>
-        <p class="card-text">Please add your project details, including the name, description, start and end dates, and current status.</p>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Add Project</a>
+        <h1 class="card-title">Add Project</h1>
+        <!-- <p class="card-text">Please add your project details, including the name, description, start and end dates, and current status.</p> -->
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">Add Project</a>
       </div>
     </div>
   </div>
   
-  <!-----------Add Projec t form Modal------------------>
+  <!-----------Add Project form Modal------------------>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -55,26 +55,39 @@
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputmanager" [(ngModel)]="manager" name="manager" #manager1="ngModel" required placeholder="Project Manager">
                 <span class="text-danger mt-1" *ngIf="manager1.invalid && manager1.touched">*Provide Valid Input</span>
-                
               </div>
             </div>
-            
-            <div class="row mb-3">
-              <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
-              <div class="col-sm-10">
-                <input type="date" class="form-control" id="startdate" [(ngModel)]="startdate" (ngModelChange)="validateDates()" name="startdate" #startdate1="ngModel" required>
-                <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
-                
+
+              <div class="row mb-3">
+                <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
+                <div class="col-sm-10">
+                  <input type="date" 
+                        class="form-control" 
+                        id="startdate" 
+                        [(ngModel)]="startdate" 
+                        (ngModelChange)="validateDates()" 
+                        [min]="today"
+                        name="startdate" 
+                        #startdate1="ngModel" 
+                        required>
+                  <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
+                </div>
               </div>
-            </div>
-            
+
             <div class="row mb-3">
               <label for="enddate" class="col-sm-2 col-form-label">End Date</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" id="enddate" [(ngModel)]="enddate" (ngModelChange)="validateDates()" name="enddate" #enddate1="ngModel" required>
+                <input type="date" 
+                      class="form-control" 
+                      id="enddate" 
+                      [(ngModel)]="enddate" 
+                      (ngModelChange)="validateDates()" 
+                      [min]="startdate"
+                      name="enddate" 
+                      #enddate1="ngModel" 
+                      required>
                 <span class="text-danger mt-1" *ngIf="enddate1.invalid && enddate1.touched">*Provide Valid Input</span>
-                <span class="text-danger mt-1" *ngIf="dateError && enddate1.touched">{{ dateError }}</span>
-
+                <span class="text-danger mt-1" *ngIf="dateError">{{ dateError }}</span>
               </div>
             </div>
             
@@ -88,20 +101,25 @@
                 
               </div>
             </div>
-            
+
             <div class="row mb-3">
-              <label for="duedate" class="col-sm-2 col-form-label" >Due Date</label>
+              <label for="duedate" class="col-sm-2 col-form-label">Due Date</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" id="duedate" [(ngModel)]="duedate" name="duedate" #duedate1="ngModel" required>
-                <span class="text-danger mt-1" *ngIf="startdate1.invalid && startdate1.touched">*Provide Valid Input</span>
+                <input type="date" 
+                      class="form-control" 
+                      id="duedate" 
+                      [(ngModel)]="duedate" 
+                      (ngModelChange)="validateDates()"
+                      name="duedate" 
+                      #duedate1="ngModel" 
+                      required>
+                <span class="text-danger mt-1" *ngIf="duedate1.invalid && duedate1.touched">*Provide Valid Input</span>
+                <span class="text-danger mt-1" *ngIf="dueDateError">{{ dueDateError }}</span>
               </div>
             </div>
             
             <div class="modal-footer mt-3">
-              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-              <!-- Add this inside .modal-footer (hidden button for closing modal) -->
-<button #closeModalBtn type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
-
+              <button #closeModalBtn type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary  sub "  [disabled]=projectForm.invalid  >Submit</button>
             </div>
         </form>

@@ -68,30 +68,30 @@ export class TaskComponent {
     }
 
     //Delete the task.....
-    deleteTask(taskid:number):void
+   async deleteTask(taskid:number):Promise<void> 
     {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let existingTasks = JSON.parse(localStorage.getItem('tasksItem') || '[]');
-          let deleteTask=existingTasks.filter((t:any)=>t.taskid!==taskid)
-          console.log(deleteTask);
-          localStorage.setItem('tasksItem',JSON.stringify(deleteTask))
-       
-          this.toast.success('Project deleted successfully!', 'Success');
-     
-        } else {
-          this.toast.info('Deletion canceled.', 'Info');
-        }
-      });
+        try {
+            const result = await Swal.fire({
+              title: 'Are you sure?',
+              text: 'You won\'t be able to revert this!',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#3085d6',
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel'
+            });
+            if(result.isConfirmed)
+            {
+              // Update local state and localStorage in one go
+              this.taskList = this.taskList.filter(task => task.taskid !== taskid);
+              localStorage.setItem('tasksItem', JSON.stringify(this.taskList));
+              this.toast.success('Task deleted successfully!', 'Success');
+            }
+          } catch (error) {
+            this.toast.error('Error deleting project', 'Error');
+            console.error('Delete error:', error);
+          }
       }
 
       selectedTaskID: number | null = null;

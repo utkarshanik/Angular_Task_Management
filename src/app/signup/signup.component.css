@@ -1,0 +1,25 @@
+.signup-container {
+    background-color: dimgrey;
+}
+
+.signup-form-container {
+    max-width: 400px;
+    background-color: gainsboro;
+}
+
+.signup-heading {
+    color: #333;
+}
+
+.validation-message {
+    color: #dc3545;
+}
+
+.link-text {
+    color: #212529;
+}
+
+.submit-button {
+    background-color: #212529;
+    color: #fff;
+}
